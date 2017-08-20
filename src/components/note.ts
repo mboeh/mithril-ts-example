@@ -2,30 +2,27 @@ import * as m from 'mithril'
 import * as stream from 'mithril/stream'
 import * as events from '../events'
 
+export const EID_NOTE_CHANGED = 'note.changed'
+
 export interface E_NoteChanged extends events.AppEvent {
-  id: 'note.changed'
+  id: typeof EID_NOTE_CHANGED
   value: string
 }
 
-function noteChanged(value: string) {
+export function noteChanged(value: string) {
   events.events(
     {
-      id: 'note.changed',
+      id: EID_NOTE_CHANGED,
       value: value
     } as E_NoteChanged
   )
 }
 
-function isNoteChanged(e: events.AppEvent): e is E_NoteChanged {
-  return e.id === 'note.changed'
+export function onNoteChanged(e: events.AppEvent): e is E_NoteChanged {
+  return !!e && e.id === EID_NOTE_CHANGED
 }
 
-export const note = stream.scan(
-  (current: string, e: events.AppEvent) =>
-    isNoteChanged(e) ? e.value : current,
-  '',
-  events.events
-)
+export const note = events.listen(onNoteChanged, e => e.value, '')
 
 export default {
   view() {

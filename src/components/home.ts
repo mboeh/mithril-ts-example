@@ -1,7 +1,10 @@
 import * as m from 'mithril'
 import nav from './nav'
-import { note } from './note'
+import { onNoteChanged } from './note'
+import * as events from '../events'
 import clicker, { readClicks } from './clicker'
+
+const note = events.listen(onNoteChanged, e => e.value, '')
 
 export default {
   view(vnode) {
