@@ -1,3 +1,5 @@
+WARNING: This is just a testbed for me to mess around with things I'm interested in learning about. Please use the original repo, not my fork.
+
 # Mithril / Typescript Example Project
 
 This is an example project using [Mithril](https://mithril.js.org/) and TypeScript.
